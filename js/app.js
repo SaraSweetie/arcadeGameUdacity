@@ -53,20 +53,24 @@ Player.prototype.handleInput = function(arrowKey){
     console.log("arrow key pressed " + arrowKey);
         switch (arrowKey) {
         case 'left':
-            player.x -= 100;
-            console.log(player.x);
+        	if (player.x >0){
+            	player.x -= 100;
+           	}
             break;    
         case 'right':
-            player.x += 100;
-            console.log(player.x);
-                break;
+            if (player.x <400){
+            	player.x += 100;
+            }
+            break;
         case 'up':
-            player.y -= 85;
-            console.log(player.y);
+        	if (player.y > -35){
+            	player.y -= 85;
+        	}
             break;  
         case 'down':
-            player.y += 85;
-            console.log(player.y);
+            if (player.y < 390){
+            	player.y += 85;
+            }
             break;  
         }
 }
