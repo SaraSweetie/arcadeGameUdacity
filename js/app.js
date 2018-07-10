@@ -8,6 +8,11 @@ var Enemy = function(x, y, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
+    this.speed = function(){
+        // while loop: use the y location and add 1 until it reaches the width of the canvas
+        // then reset y=0
+        // set timeout to delay bug starting back up?
+    };
 };
 
 // Update the enemy's position, required method for game
@@ -28,6 +33,10 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 390;
+
+    //need method for player location
+
+    //need method for player collision
 };
 
 // This class requires an update(), render() and
@@ -40,21 +49,37 @@ Player.prototype.render= function() {
 };
 
 // a handleInput() method.
-Player.prototype.handleInput = function(){
-
-};
+Player.prototype.handleInput = function(arrowKey){
+    console.log("arrow key pressed " + arrowKey);
+        switch (arrowKey) {
+        case 'left':
+            player.x -= 100;
+            console.log(player.x);
+            break;    
+        case 'right':
+            player.x += 100;
+            console.log(player.x);
+                break;
+        case 'up':
+            player.y -= 85;
+            console.log(player.y);
+            break;  
+        case 'down':
+            player.y += 85;
+            console.log(player.y);
+            break;  
+        }
+}
 
 // Now instantiate your objects.
 let player = new Player();
 
 // Place all enemy objects in an array called allEnemies
-var enemy1 = new Enemy(0, 60);
-var enemy2 = new Enemy(0, 145);
-var enemy3 = new Enemy(0, 225);
-var enemy4 = new Enemy(85, 225);
-var enemy5 = new Enemy(50, 145);
+var enemy1 = new Enemy(0, 62, 120);
+var enemy2 = new Enemy(0, 145, 80);
+var enemy3 = new Enemy(0, 228, 50);
 
-let allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
+let allEnemies = [enemy1, enemy2, enemy3 ];
 // Place the player object in a variable called player
 
 
