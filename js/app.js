@@ -8,11 +8,7 @@ var Enemy = function(x, y, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x;
     this.y = y;
-    this.speed = function(){
-        // while loop: use the y location and add 1 until it reaches the width of the canvas
-        // then reset y=0
-        // set timeout to delay bug starting back up?
-    };
+    this.speed = speed;
 };
 
 // Update the enemy's position, required method for game
@@ -21,6 +17,7 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x += this.speed * dt;
 };
 
 // Draw the enemy on the screen, required method for game
@@ -64,12 +61,12 @@ Player.prototype.handleInput = function(arrowKey){
             break;
         case 'up':
         	if (player.y > -35){
-            	player.y -= 85;
+            	player.y -= 83;
         	}
             break;  
         case 'down':
             if (player.y < 390){
-            	player.y += 85;
+            	player.y += 83;
             }
             break;  
         }
