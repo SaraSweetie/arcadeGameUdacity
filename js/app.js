@@ -1,5 +1,5 @@
 // Enemies our player must avoid
-const yStart = [62, 145, 228];
+const yStart = [1, 2, 3];
 var Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -9,9 +9,10 @@ var Enemy = function(x, y, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
     this.y = yStart[Math.floor(Math.random()*yStart.length)];
-    this.speed = Math.floor(Math.random() * 350 + 75);
+    this.speed = Math.floor(Math.random() * 5.5 + 1.5);
     Win = function(){
         console.log('You Win');
+        render();
     }
 };
 
@@ -19,18 +20,18 @@ var Enemy = function(x, y, speed) {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     this.x += this.speed * dt;
-    if (this.x >500){
-        this.x = -100;
+    if (this.x >5){
+        this.x = -1;
         //reset the speed
-        this.speed = Math.floor(Math.random() * 350  + 100);
+        this.speed = Math.floor(Math.random() * 5.5 + 1.5);
         //reset the y location
-        this.y = yStart[Math.floor(Math.random()*yStart.length)];
+        this.y = yStart[Math.floor(Math.random() * yStart.length)];
         }
 };
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83)-22);
 };
 
 // Now write your own player class
@@ -86,7 +87,6 @@ Player.prototype.handleInput = function(arrowKey){
             }
             break;  
         }
-        this.moving == true;
 }
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
