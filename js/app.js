@@ -10,10 +10,6 @@ var Enemy = function(x, y, speed) {
     this.x = 0;
     this.y = yStart[Math.floor(Math.random()*yStart.length)];
     this.speed = Math.floor(Math.random() * 5.5 + 1.5);
-    Win = function(){
-        console.log('You Win');
-        render();
-    }
 };
 
 // Update the enemy's position, required method for game
@@ -39,6 +35,10 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 2;
     this.y = 5;
+    this.Win = function(){
+        alert('You Win');
+        this.y = 5;
+    }
 
     //need method for player location
     this.location = function playerLocation(){
@@ -56,9 +56,8 @@ Player.prototype.update = function(dt) {
 
 Player.prototype.render= function() {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83)-22);
-    this.moving == false;
         if (player.y === 0){
-            Win();
+            player.Win();
         }
 };
 
