@@ -9,7 +9,7 @@ var Enemy = function(x, y, speed) {
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
     this.y = yStart[Math.floor(Math.random()*yStart.length)];
-    this.speed = Math.floor(Math.random() * 5.5 + 1.5);
+    this.speed = Math.floor(Math.random() * 4) + 1.5;
 };
 
 // Update the enemy's position, required method for game
@@ -19,10 +19,12 @@ Enemy.prototype.update = function(dt) {
     if (this.x >5){
         this.x = -1;
         //reset the speed
-        this.speed = Math.floor(Math.random() * 5.5 + 1.5);
+        this.speed = Math.floor(Math.random() * 4 + 1.5);
         //reset the y location
         this.y = yStart[Math.floor(Math.random() * yStart.length)];
         }
+    //console.log(`Enemy x=${this.x} and y=${this.y}`); (x isn't a whole number...)
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -36,22 +38,27 @@ var Player = function() {
     this.x = 2;
     this.y = 5;
     this.Win = function(){
-        alert('You Win');
+        alert('You Win! Press Ok to play again.');
+        this.x = 2;
         this.y = 5;
     }
+    console.log(`player x=${this.x} and y=${this.y}`);
+};
 
-    //need method for player location
-    this.location = function playerLocation(){
-
-    };
-    //need method for player collision
-    this.collision = function collision(){
-
-    };
+Player.prototype.checkCollision = function() {
+    //console.log(`Enemy x=${this.x} and y=${this.y}`); //--- not working player location
+    //console.log(`player x=${this.x} and y=${this.y}`);
+    if ((this.y === Enemy.y) &&
+        (this.x === Enemy.x)) {
+        console.log("collision!!");
+            this.x = 2;
+            this.y = 5;
+        };
 };
 
 // This class requires an update(), render() and
 Player.prototype.update = function(dt) {
+    this.checkCollision();
 };
 
 Player.prototype.render= function() {
