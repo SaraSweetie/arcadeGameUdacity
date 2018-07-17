@@ -25,10 +25,10 @@ Enemy.prototype.update = function(dt) {
         this.y = yStart[Math.floor(Math.random() * yStart.length)];
     }
   
-    if ((Math.ceil(this.y) === player.y) &&
-        (Math.ceil(this.x) === player.x)) {
-	    	console.log(`Enemy x=${this.x} and y=${this.y}`);
-			console.log(`Player x=${player.x} and y=${player.y}`);
+    if ( this.y === player.y &&
+         this.x < player.x) {
+	    	//console.log(`Enemy x=${this.x} and y=${this.y}`);
+			//console.log(`Player x=${player.x} and y=${player.y}`);
             player.x = 2;
             player.y = 5;
         };
@@ -44,7 +44,6 @@ let Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 2;
     this.y = 5;
-    //console.log(`player x=${this.x} and y=${this.y}`);
 };
 
 Player.prototype.win = function(){
@@ -53,7 +52,6 @@ Player.prototype.win = function(){
         this.x = 2;
         this.y = 5;
     }
-
 
 // This class requires an update(), render() and
 Player.prototype.update = function(dt) {
@@ -94,7 +92,7 @@ Player.prototype.handleInput = function(arrowKey){
 }
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-let allEnemies = [...Array(4)].map((_,i)=> new Enemy(0,i+1));
+let allEnemies = [...Array(2)].map((_,i)=> new Enemy(0,i+1));
 // Place the player object in a variable called player
 let player = new Player();
 
