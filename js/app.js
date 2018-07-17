@@ -1,6 +1,7 @@
+'use strict';
 // Enemies our player must avoid
 const yStart = [1, 2, 3];
-var Enemy = function(x, y, speed) {
+let Enemy = function(x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -22,9 +23,15 @@ Enemy.prototype.update = function(dt) {
         this.speed = Math.floor(Math.random() * 4 + 1.5);
         //reset the y location
         this.y = yStart[Math.floor(Math.random() * yStart.length)];
-        }
-    //console.log(`Enemy x=${this.x} and y=${this.y}`); (x isn't a whole number...)
-
+    }
+  
+    if ((Math.ceil(this.y) === player.y) &&
+        (Math.ceil(this.x) === player.x)) {
+	    	console.log(`Enemy x=${this.x} and y=${this.y}`);
+			console.log(`Player x=${player.x} and y=${player.y}`);
+            player.x = 2;
+            player.y = 5;
+        };
 };
 
 // Draw the enemy on the screen, required method for game
@@ -33,38 +40,29 @@ Enemy.prototype.render = function() {
 };
 
 // Now write your own player class
-var Player = function() {
+let Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 2;
     this.y = 5;
-    this.Win = function(){
+    //console.log(`player x=${this.x} and y=${this.y}`);
+};
+
+Player.prototype.win = function(){
         alert('You Win! Press Ok to play again.');
+        //reset Player start location
         this.x = 2;
         this.y = 5;
     }
-    console.log(`player x=${this.x} and y=${this.y}`);
-};
 
-Player.prototype.checkCollision = function() {
-    //console.log(`Enemy x=${this.x} and y=${this.y}`); //--- not working player location
-    //console.log(`player x=${this.x} and y=${this.y}`);
-    if ((this.y === Enemy.y) &&
-        (this.x === Enemy.x)) {
-        console.log("collision!!");
-            this.x = 2;
-            this.y = 5;
-        };
-};
 
 // This class requires an update(), render() and
 Player.prototype.update = function(dt) {
-    this.checkCollision();
 };
 
 Player.prototype.render= function() {
     ctx.drawImage(Resources.get(this.sprite), this.x * 101, (this.y * 83)-22);
         if (player.y === 0){
-            player.Win();
+            player.win();
         }
 };
 
@@ -96,7 +94,7 @@ Player.prototype.handleInput = function(arrowKey){
 }
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
-const allEnemies = [...Array(4)].map((_,i)=> new Enemy(0,i+1));
+let allEnemies = [...Array(4)].map((_,i)=> new Enemy(0,i+1));
 // Place the player object in a variable called player
 let player = new Player();
 
